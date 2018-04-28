@@ -1,4 +1,6 @@
 # Mail.Net
-Simple, no frills, email sending/testing utility for .NET Standard 2.0.
+Simple, no frills, email sending/testing library for .NET Standard 2.0.
 
-Includes WinForms testing GUI
+Includes:
+- Mail send/exception callbacks
+- WinForms testing GUI
