@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Mail.Net/.vs/Mail.Net/v15
+/Mail.Net/Mail.Net/obj
+/Mail.Net/Mail.Net.Ui/bin/Debug
+/Mail.Net/Mail.Net/bin/Debug/netstandard2.0
+/Mail.Net/Mail.Net.Ui/obj/Debug
