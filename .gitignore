@@ -7,3 +7,6 @@
 /Mail.Net/Mail.Net.Ui/bin/Debug
 /Mail.Net/Mail.Net/bin/Debug/netstandard2.0
 /Mail.Net/Mail.Net.Ui/obj/Debug
+/Mail.Net/Mail.Net/bin
+/Mail.Net/Mail.Net.Ui/obj/Release
+/Mail.Net/Package.nuspec

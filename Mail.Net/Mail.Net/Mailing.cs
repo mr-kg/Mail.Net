@@ -14,6 +14,16 @@ namespace Mail.Net
         bool _enableSsl;
         MailAddress _fromAddress;
 
+        /// <summary>
+        /// Initialises an instance of Mailing.
+        /// </summary>
+        /// <param name="username">Username for the SMTP Server</param>
+        /// <param name="password">Password for the SMTP Server</param>
+        /// <param name="smtpHost">Host address for the SMTP Server</param>
+        /// <param name="smtpPort">Port for the SMTP Server</param>
+        /// <param name="fromAddress">Address that mail will be sent from</param>
+        /// <param name="enableSsl">Boolean to indicate whether we will use SSL</param>
+        /// <param name="mailFrom">The text to appear in the 'From' field in the sent mail</param>
         public Mailing(string username, string password, string smtpHost, int smtpPort, string fromAddress, bool enableSsl)
         {
             _credentials = new NetworkCredential(username, password);
@@ -23,7 +33,17 @@ namespace Mail.Net
             _fromAddress = new MailAddress(fromAddress);
         }
 
-        public void SendMail(string recipients, string bcc, string subject, string body, Action sendCompletedAction, Action<Exception> onExceptionAction, List<Attachment> attachments = null)
+        /// <summary>
+        /// Standard, synchronous mail sending method
+        /// </summary>
+        /// <param name="recipients">Recipients, can be semi-colon delimited</param>
+        /// <param name="bcc">BCC recipients, can be semi-colon delimited</param>
+        /// <param name="subject">Subject text</param>
+        /// <param name="body">Body text. Can be HTML or plaintext</param>
+        /// <param name="sendCompletedAction">An action to be performed when send is complete</param>
+        /// <param name="onExceptionAction">An action to be performed on exception</param>
+        /// <param name="attachments">Attachments we want to add to the mail</param>
+        public void SendMail(string recipients, string bcc, string subject, string body, Action sendCompletedAction = null, Action<Exception> onExceptionAction = null, List<Attachment> attachments = null)
         {
             var client = _createSmtpClient();
             var message = _createMailMessage(recipients, bcc, subject, body, attachments);
@@ -31,11 +51,11 @@ namespace Mail.Net
             try
             {
                 client.Send(message);
-                sendCompletedAction.Invoke();
+                sendCompletedAction?.Invoke();
             }
             catch (Exception ex)
             {
-                onExceptionAction.Invoke(ex);
+                onExceptionAction?.Invoke(ex);
             }
             finally
             {
@@ -44,24 +64,35 @@ namespace Mail.Net
             }
         }
 
-        public void SendMailAsync(string recipients, string bcc, string subject, string body, Action sendCompletedAction, Action<Exception> onExceptionAction, List<Attachment> attachments = null)
+        /// <summary>
+        /// Asynchronous mail sending method
+        /// </summary>
+        /// <param name="recipients">Recipients, can be semi-colon delimited</param>
+        /// <param name="bcc">BCC recipients, can be semi-colon delimited</param>
+        /// <param name="subject">Subject text</param>
+        /// <param name="body">Body text. Can be HTML or plaintext</param>
+        /// <param name="sendCompletedAction">An action to be performed when send is complete</param>
+        /// <param name="onExceptionAction">An action to be performed on exception</param>
+        /// <param name="attachments">Attachments we want to add to the mail</param>
+        public async Task SendMailAsync(string recipients, string bcc, string subject, string body, Action sendCompletedAction = null, Action<Exception> onExceptionAction = null, List<Attachment> attachments = null)
         {
             var client = _createSmtpClient();
             var message = _createMailMessage(recipients, bcc, subject, body, attachments);
+
             client.SendCompleted += (s, e) =>
             {
-                sendCompletedAction.Invoke();
+                sendCompletedAction?.Invoke();
                 client.Dispose();
                 message.Dispose();
             };
 
             try
             {
-                client.SendAsync(message, null);
+                await client.SendMailAsync(message);
             }
             catch (Exception ex)
             {
-                onExceptionAction.Invoke(ex);
+                onExceptionAction?.Invoke(ex);
             }
         }
 
