@@ -30,5 +30,19 @@ namespace Mail.Net.Ui
                     MessageBox.Show(ex.ToString());
                 });
         }
+
+        private async void btnSendAsync_Click(object sender, EventArgs e)
+        {
+            Mail.Net.Mailing m = new Mailing(txtUsr.Text, txtPwd.Text, txtSmtpHost.Text, Convert.ToInt32(txtSmtpPort.Text), txtFromAddress.Text, chkSsl.Checked);
+            await m.SendMailAsync(txtRecipients.Text, txtBCC.Text, txtSubject.Text, txtBody.Text,
+                () =>
+                {
+                    MessageBox.Show("Send complete!");
+                },
+                (ex) =>
+                {
+                    MessageBox.Show(ex.ToString());
+                });
+        }
     }
 }

@@ -50,6 +50,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.txtSubject = new System.Windows.Forms.TextBox();
             this.btnSend = new System.Windows.Forms.Button();
+            this.btnSendAsync = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtUsr
@@ -237,11 +238,22 @@
             this.btnSend.UseVisualStyleBackColor = true;
             this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
             // 
+            // btnSendAsync
+            // 
+            this.btnSendAsync.Location = new System.Drawing.Point(191, 662);
+            this.btnSendAsync.Name = "btnSendAsync";
+            this.btnSendAsync.Size = new System.Drawing.Size(122, 34);
+            this.btnSendAsync.TabIndex = 22;
+            this.btnSendAsync.Text = "Send Async";
+            this.btnSendAsync.UseVisualStyleBackColor = true;
+            this.btnSendAsync.Click += new System.EventHandler(this.btnSendAsync_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(418, 709);
+            this.Controls.Add(this.btnSendAsync);
             this.Controls.Add(this.btnSend);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txtSubject);
@@ -295,6 +307,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtSubject;
         private System.Windows.Forms.Button btnSend;
+        private System.Windows.Forms.Button btnSendAsync;
     }
 }
 

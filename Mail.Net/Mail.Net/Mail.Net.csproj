@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>K. Gradidge</Authors>
+    <Description>Simple, no frills, email sending/testing library for .NET Standard 2.0</Description>
+    <RepositoryUrl>https://github.com/mr-kg/Mail.Net</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/mr-kg/Mail.Net</PackageProjectUrl>
+    <Version>1.0.1</Version>
+    <PackageReleaseNotes>Corrected asynchrony.
+Added optional, nullable action params.
+Included summary and param metadata.</PackageReleaseNotes>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
 </Project>
